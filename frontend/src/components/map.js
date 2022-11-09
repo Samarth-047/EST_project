@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 import MarkerClusterGroup from 'react-leaflet-cluster'
-import { MapContainer, TileLayer, Marker, Tooltip , Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Tooltip, Popup } from 'react-leaflet'
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -29,15 +29,11 @@ const Map = (props) => {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     }
-    useEffect(() => {
-        axios
-            .get("http://localhost:4000/hotel/")
-            .then((response) => {
-                sethotel(response.data);
-            })
-            .catch((error) => {
-            });
-    }, []);
+    //create a 2d array of lat and long
+    const lat = ["22.7443", "20.730696", "21.9497"]
+    const long = ["69.9550", "86.866511", "89.1833"]
+    const name = ["Gulf of kachh", "Bhitarkanika", "Sunderbans"]
+    const position = [lat.map((item) => item), long.map((item) => item)]
 
     const a = "51.505"
     const b = "-0.09"
@@ -52,21 +48,8 @@ const Map = (props) => {
                             sx={{ cursor: "pointer" }}
                             onClick={() => navigate("/")}
                         >
-                            Samarth Tourist Management Service
+                            MANGROOVE DATABASE OF THE COUNTRY
                         </Typography>
-                        <Box sx={{ flexGrow: 1 }} />
-                        <Button color="inherit" onClick={() => { navigate("/hotel") }}>
-                            Hotel
-                        </Button>
-                        <Button variant="contained" color="info" onClick={() => { }}>
-                            Map
-                        </Button>
-                        <Button color="inherit" onClick={() => navigate("/booking")}>
-                            Booking
-                        </Button>
-                        <Button color="warning" onClick={() => navigate("/")}>
-                            Logout
-                        </Button>
                     </Toolbar>
                 </AppBar>
             </Box>
@@ -79,15 +62,14 @@ const Map = (props) => {
                         <MarkerClusterGroup
                             chunkedLoading
                         >
-                            {hotel.map((users1) =>
-                                <Marker position={[users1.location.lat, users1.location.long, "abc"]} >
-                                    <Tooltip>
-                                    Hotel: {users1.name} <br /> Room Available: {users1.room_count}
-                                    </Tooltip>
-                                    {/* <Popup>
-                                        Hotel: {users1.name} <br /> Room Available: {users1.room_count}
-                                    </Popup> */}
-                                </Marker>
+                            {lat.map((users1, index) =>
+                                <>
+                                    <Marker position={[lat[index], long[index], "abc"]} >
+                                        <Tooltip>
+                                            Hotel: {name[index]}
+                                        </Tooltip>
+                                    </Marker>
+                                </>
                             )}
                         </MarkerClusterGroup>
                     </MapContainer>
