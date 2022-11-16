@@ -38,6 +38,7 @@ import {
 
 
 import land_cover from "data/land_cover";
+import species_cover from "data/species_cover";
 import { Typography } from "@mui/material";
 
 const LandCoverTable = ({ mangroveKey }) => {
@@ -70,20 +71,50 @@ const LandCoverTable = ({ mangroveKey }) => {
     );
 };
 
+const SpeciesCoverTable = ({ mangroveKey }) => {
+    const headings = species_cover["headings"][mangroveKey] || [];
+    const data = species_cover["data"][mangroveKey] || [];
+
+    return (
+        <>
+            <Table responsive style={{ 'text-align': 'center' }}>
+                <thead className="text-primary">
+                    <tr>
+                        {headings.map((heading, index) => (
+                            <th key={index}>{heading}</th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((land, index) => {
+                        return (
+                            <tr>
+                                {land.map((val, index) => {
+                                    return <td>{val}</td>;
+                                })}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </Table>
+        </>
+    );   
+}
+
 function Dataset() {
     const [mangrove, setMangrove] = React.useState("Krishna");
 
-    const mangroveKeys = ["Krishna", "Sundarbans", "Bhitarkanika", "Andaman", "Gulf-of-kachh"];
+    const mangroveKeys = ["Krishna", "Sundarbans", "Bhitarkanika", "Andaman", "Kachchh"];
 
     const mangroveName = new Map([
         ["Krishna", "Krishna Godavari"],
-        ["Gulf-of-kachh", "Gulf of Kachh"],
+        ["Kachchh", "Gulf of Kachchh"],
         ["Bhitarkanika", "Bhitarkanika"],
         ["Sundarbans", "Sunderbans"],
         ["Andaman", "Andaman and Nicobar"],
     ])
 
-    const LandCoverDropDown = () => {
+    const MangroveDropDown = () => {
         const [dropdownOpen, setDropdownOpen] = React.useState(false);
         const toggle = () => setDropdownOpen((prevState) => !prevState);
 
@@ -93,7 +124,7 @@ function Dataset() {
                     <UncontrolledDropdown 
                     // isOpen={dropdownOpen} toggle={toggle} direction={"down"}
                     >
-                        <Typography>Land Cover: <DropdownToggle  caret> {mangroveName.get(mangrove)} </DropdownToggle> </Typography>
+                        <Typography>Mangrove: <DropdownToggle  caret> {mangroveName.get(mangrove)} </DropdownToggle> </Typography>
                         <DropdownMenu >
                             {mangroveKeys.map((mangroveKey) => (
                                 <DropdownItem 
@@ -103,7 +134,6 @@ function Dataset() {
                                 </DropdownItem>
                             ))}
                         </DropdownMenu>
-                    {/* </Dropdown> */}
                     </UncontrolledDropdown>
                 </div>
             </>);
@@ -114,13 +144,13 @@ function Dataset() {
         <>
             <div className="content">
                 <Row>
-                    <LandCoverDropDown />
+                    <MangroveDropDown />
                 </Row>  
                 <Row>
                     <Col md="12">
                         <Card>
                             <CardHeader>
-                                <CardTitle tag="h4">Land Cover of {mangroveName.get(mangrove)} (in ha)</CardTitle>
+                                <CardTitle tag="h4">Land Cover of {mangroveName.get(mangrove)} </CardTitle>
                             </CardHeader>
                             <CardBody>
                                 <LandCoverTable mangroveKey={mangrove} />
@@ -128,6 +158,21 @@ function Dataset() {
                         </Card>
                     </Col>
                 </Row>
+
+
+                <Row>
+                    <Col md="12">
+                        <Card>
+                            <CardHeader>
+                                <CardTitle tag="h4">Species of {mangroveName.get(mangrove)} </CardTitle>
+                            </CardHeader>
+                            <CardBody>
+                                <SpeciesCoverTable mangroveKey={mangrove} />
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+
             </div>
         </>
     );
