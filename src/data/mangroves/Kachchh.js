@@ -19,3 +19,8 @@ export const Kachchh_land_cover_data = [
     ["5","Salt pans", "75.2", "165.6", "311.4", "329.6", "365.4", "439.8", "469.4","524.2"],
     ["6","Built-up land" ,"3.6" ,"6.1" ,"13.6", "17.3", "24", "56" ,"61.5","1608.33"],
 ];
+
+export const Kachchh_species_pie = {
+    'data': [97,3],
+    'labels': ["Avicennia Marina","Others"],
+}
