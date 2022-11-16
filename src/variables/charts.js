@@ -16,6 +16,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+
+const { SpeciesPieChartLabels, SpeciesPieChartData } = require("data/species_pie");
+
 const dashboard24HoursPerformanceChart = {
   data: (canvas) => {
     return {
@@ -97,56 +100,26 @@ const dashboard24HoursPerformanceChart = {
   }
 };
 
-const dashboardEmailStatisticsChart = {
+const SpeciesPieChart = {
   data: (canvas) => {
+    const labels = SpeciesPieChartLabels('Andaman');
+    const data = SpeciesPieChartData('Andaman');
     return {
-      labels: [1, 2, 3],
+      labels: labels,
       datasets: [
         {
-          label: "Emails",
+          label: "Species",
           pointRadius: 0,
           pointHoverRadius: 0,
           backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468", "#ef8157"],
           borderWidth: 0,
-          data: [342, 480, 530, 120]
+          data: data
         }
       ]
     };
-  },
-  options: {
-    plugins: {
-      legend: { display: false },
-      tooltip: { enabled: false }
-    },
-    maintainAspectRatio: false,
-    pieceLabel: {
-      render: "percentage",
-      fontColor: ["white"],
-      precision: 2
-    },
-    scales: {
-      y: {
-        ticks: {
-          display: false
-        },
-        grid: {
-          drawBorder: false,
-          display: false
-        }
-      },
-      x: {
-        barPercentage: 1.6,
-        grid: {
-          drawBorder: false,
-          display: false
-        },
-        ticks: {
-          display: false
-        }
-      }
-    }
   }
 };
+
 
 const dashboardNASDAQChart = {
   data: (canvas) => {
@@ -198,8 +171,43 @@ const dashboardNASDAQChart = {
   }
 };
 
+const pieChartOptions = {
+  plugins: {
+    legend: { display: false },
+    tooltip: { enabled: false }
+  },
+  maintainAspectRatio: false,
+  pieceLabel: {
+    render: "percentage",
+    fontColor: ["white"],
+    precision: 2
+  },
+  scales: {
+    y: {
+      ticks: {
+        display: false
+      },
+      grid: {
+        drawBorder: false,
+        display: false
+      }
+    },
+    x: {
+      barPercentage: 1.6,
+      grid: {
+        drawBorder: false,
+        display: false
+      },
+      ticks: {
+        display: false
+      }
+    }
+  }
+};
+
 module.exports = {
   dashboard24HoursPerformanceChart,
-  dashboardEmailStatisticsChart,
-  dashboardNASDAQChart
+  SpeciesPieChart,
+  dashboardNASDAQChart,
+  pieChartOptions
 };
