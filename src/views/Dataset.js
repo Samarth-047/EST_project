@@ -9,7 +9,6 @@ import {
     Col,
 } from "reactstrap";
 import {
-    Dropdown,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,

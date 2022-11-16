@@ -1,7 +1,7 @@
 const Bhitakanika_species_headings = [
     "S. No.",
     "Mangrove species",
-    "Number of plants"
+    "Number of plants/heactare"
 ];
 
 const Bhitakanika_species_data = [

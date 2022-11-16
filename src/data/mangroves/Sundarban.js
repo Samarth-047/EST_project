@@ -21,7 +21,7 @@ export const Sundarban_species_headings = [
     "year 1977",
     "Year 1989",
     "Year 2000",
-    "Year 2015",
+    "Year 2015"
 ];
 
 export const Sundarban_species_data = [
