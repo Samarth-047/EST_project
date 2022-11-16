@@ -44,9 +44,9 @@ function Map() {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   }
   //create a 2d array of lat and long
-  const lat = ["22.7443", "20.39", "21.9497", "23.9497", "15.42" ]
-  const long = ["69.9550", "86.54", "89.1833", "62.1833", "80.42"]
-  const name = ["gulf-of-kachh", "bhitarkanika", "sunderbans", "andaman", "krishna-godavari"]
+  const lat = ["22.7443", "20.74", "21.9497", "13", "16.70","11.42" ]
+  const long = ["69.9550", " 87.00", "89.1833", "92", "82.11","79.77"]
+  const name = ["gulf-of-kachh", "bhitarkanika", "sunderbans", "andaman", "krishna-godavari","Pichavaram"]
   const position = [lat.map((item) => item), long.map((item) => item)]
   return (
     <>
