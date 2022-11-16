@@ -22,6 +22,7 @@ import Bhitarkanika from "views/Bhitarkanika.js";
 import Krishna from "views/Krishna.js";
 import Maps from "views/Map.js";
 import Gulfofkachh from "views/gulf-of-kachh.js";
+import Dataset from "views/Dataset.js";
 
 var routes = [
   {
@@ -65,6 +66,13 @@ var routes = [
     name: "Krishna-Godavari",
     icon: "nc-icon nc-tile-56",
     component: Krishna,
+    layout: "/admin"
+  },
+  {
+    path: "/dataset",
+    name: "Overall dataset",
+    icon: "nc-icon nc-tile-56",
+    component: Dataset,
     layout: "/admin"
   },
 ];
