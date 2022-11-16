@@ -24,3 +24,43 @@ export const Andaman_land_cover_data = [
     ["5.", "Water", "598.2", "593.5", "594.8", "596.8","616.3","634.4","36.2"],
     ["6.", "Settlements", "9.2", "11.1", "12.0", "13.6","14.5","15..5","6.3"],
 ];
+
+export const Andaman_species_headings = [
+    "Sr. No.",
+    "Family",
+    "Scientific Name", 
+    "North Andaman",
+    "Middle Andaman",
+    "South Andaman",
+    "Little Andaman",
+    " Car Nicobar",
+    "Great Nicobar",
+];
+
+export const Andaman_species_data = [
+    ["1.","Acanthaceae","Acanthus ebracteatus","❌","❌","✅","❌","❌","✅"],
+    ["2.", "Acanthaceae", "Acanthus ilicifolius", "✅", "✅", "✅", "✅", "❌", "✅"],
+    ["3.", "Acanthaceae", "Avicennia marina", "✅", "✅", "✅", "✅", "❌", "❌"],
+    ["4.", "Acanthaceae", "Avicennia officinalis", "✅", "✅", "✅", "✅", "❌", "❌"],
+    ["5.","Arecaceae","Nypa fruticans","✅","✅","✅","✅","❌","✅"],
+    ["6.","Arecaceae","Phoenix paludosa","✅","✅","✅","✅","❌","✅"],
+    ["7.","Combretaceae","Lumnitzera littorea","✅","✅","✅","✅","❌","❌"],
+    ["8.","Combretaceae","Lumnitzera racemosa","✅","✅","✅","✅","✅","❌"],
+    ["9.", "Euphorbiaceae", "Excoecaria agallocha", "✅", "✅", "✅", "✅", "❌", "✅"],
+    ["10.","Lythraceae","Sonneratia alba","✅","✅","✅","✅","❌","✅"],
+    ["11.","Lythraceae","Sonneratia caseolaris","❌","❌","❌","✅","❌","❌"],
+    ["12.","Lythraceae","Sonneratia griffithi","❌","✅","❌","❌","❌","❌"],
+    ["13.","Lythraceae","Sonneratia ovata","❌","❌","✅","❌","❌","❌"],
+    ["14.","Meliaceae","Xylocarpus granatum","✅","✅","✅","✅","❌","✅"],
+    ["15.","Meliaceae","Xylocarpus moluccensis","❌","❌","✅","❌","❌","❌"],
+    ["16.", " Myrsinaceae","Aegiceras corniculatum","✅","✅","✅","✅","❌","❌"],
+    ["17.","Rhizophoraceae","Bruguiera cylindrica","✅","✅","✅","✅","❌","❌"],
+    ["18.","Rhizophoraceae","Bruguiera gymnorrhiza","✅","✅","✅","✅","✅","✅"],
+    ["19.","Rhizophoraceae","Bruguiera parviflora","✅","❌","✅","❌","❌","❌"],
+    ["20.","Rhizophoraceae","Ceriops tagal","✅","✅","✅","✅","❌","✅"],
+    ["21.","Rhizophoraceae","Rhizophora apiculata","✅","✅","✅","✅","✅","✅"],
+    ["22.","Rhizophoraceae","Rhizophora mucronata","✅","✅","✅","✅","✅","✅"],
+    ["23.","Rhizophoraceae","Rhizophora stylosa","✅","✅","✅","✅","✅","❌"],
+    ["24.","Rubiaceae","Scyphiphora hydrophyllaceae","✅","✅","✅","✅","❌","❌"],
+    ["25.","Sterculiaceae","Heritiera littoralis","✅","✅","✅","✅","❌","❌"],
+];

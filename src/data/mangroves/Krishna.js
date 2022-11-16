@@ -17,3 +17,25 @@ export const Krishna_land_cover_data = [
     ["8.", "Mud Flat", "14656", "10638", "8999", "-38.6"],
     ["9.", "Casuarina", "3184", "959", "2048", "-35.68"],
 ];
+
+export const Krishna_species_headings = [
+    "Sr. No.",
+    "Family",
+    "Scientific Name",
+    "Local Name"
+];
+
+export const Krishna_species_data = [
+    ["1.", "Euphorbiaceae", "Excoecaria agallocha", "Tilla / Chilla"],
+    ["2.", "Avicenniaceae", "Avicennia officinalis", "Nalla mada"],
+    ["3.", "Avicenniaceae", "Avicennia mariana", "Tella mada"],
+    ["4", "Rhizophoraceae", "Rhizophora apiculata", "uppu poa"],
+    ["5","Aizoaceae","Sesuvium portulacastrum","Vangaredukura"],
+    ["6","Fabaceae","Dalbergia spinosa Roxb","Chillanki"],
+    ["7","Lamiaceae","Volkameria inermis L","Pisingi/Pisung"],
+    ["8","Lythraceae","Sonneratia apetala","Kalingi"],
+    ["9","Combretaceae","Lumnitzera racemosa","Kadivi"],
+    ["10","Myrsinaceae","Aegiceras corniculatum","Guggiliam"],
+
+
+];
