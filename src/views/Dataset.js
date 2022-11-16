@@ -1,24 +1,4 @@
-/*!
-
-=========================================================
-* Paper Dashboard React - v1.3.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
 import {
     Card,
     CardHeader,
@@ -35,11 +15,11 @@ import {
     DropdownMenu,
     DropdownItem,
 } from 'reactstrap';
-
-
 import land_cover from "data/land_cover";
 import species_cover from "data/species_cover";
 import { Typography } from "@mui/material";
+
+
 
 const LandCoverTable = ({ mangroveKey }) => {
     const headings = land_cover["headings"][mangroveKey] || [];
@@ -104,12 +84,12 @@ const SpeciesCoverTable = ({ mangroveKey }) => {
 function Dataset() {
     const [mangrove, setMangrove] = React.useState("Krishna");
 
-    const mangroveKeys = ["Krishna", "Sundarbans", "Bhitarkanika", "Andaman", "Kachchh"];
+    const mangroveKeys = ["Krishna", "Sundarbans", "Bhitakanika", "Andaman", "Kachchh"];
 
     const mangroveName = new Map([
         ["Krishna", "Krishna Godavari"],
         ["Kachchh", "Gulf of Kachchh"],
-        ["Bhitarkanika", "Bhitarkanika"],
+        ["Bhitakanika", "Bhitakanika"],
         ["Sundarbans", "Sunderbans"],
         ["Andaman", "Andaman and Nicobar"],
     ])
