@@ -66,7 +66,6 @@ function Dashboard(props) {
         activeColor={activeColor}
       />
       <div className="main-panel" ref={mainPanel}>
-        <DemoNavbar {...props} />
         <Switch>
           {routes.map((prop, key) => {
             return (
@@ -78,14 +77,15 @@ function Dashboard(props) {
             );
           })}
         </Switch>
-        <Footer fluid />
+        <br/>
+
       </div>
-      <FixedPlugin
+      {/* <FixedPlugin
         bgColor={backgroundColor}
         activeColor={activeColor}
         handleActiveClick={handleActiveClick}
         handleBgClick={handleBgClick}
-      />
+      /> */}
     </div>
   );
 }
