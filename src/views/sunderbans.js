@@ -1,281 +1,153 @@
-/*!
 
-=========================================================
-* Paper Dashboard React - v1.3.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
+import { textAlign } from "@mui/system";
 import React from "react";
-// react plugin for creating notifications over the dashboard
-import NotificationAlert from "react-notification-alert";
-// reactstrap components
+import { Line, Pie } from "react-chartjs-2";
 import {
-  UncontrolledAlert,
-  Alert,
-  Button,
   Card,
   CardHeader,
   CardBody,
+  CardFooter,
   CardTitle,
   Row,
   Col
 } from "reactstrap";
+// core components
+import {
+  LandCoverLine,
+  SpeciesPieChart,
+  pieChartOptions,
+  lineChartOptions
+} from "variables/charts.js";
+const { SpeciesPieChartColors } = require("data/species_pie");
+const { SpeciesPieChartLabels } = require("data/species_pie");
 
-function Notifications() {
-  const notificationAlert = React.useRef();
-  const notify = (place) => {
-    var color = Math.floor(Math.random() * 5 + 1);
-    var type;
-    switch (color) {
-      case 1:
-        type = "primary";
-        break;
-      case 2:
-        type = "success";
-        break;
-      case 3:
-        type = "danger";
-        break;
-      case 4:
-        type = "warning";
-        break;
-      case 5:
-        type = "info";
-        break;
-      default:
-        break;
-    }
-    var options = {};
-    options = {
-      place: place,
-      message: (
-        <div>
-          <div>
-            Welcome to <b>Paper Dashboard React</b> - a beautiful freebie for
-            every web developer.
+const SundarbansSpeciesPieChart = () => {
+  const currMangrove = localStorage.getItem('currMangrove');
+  const data = (SpeciesPieChart.data);
+  const options = pieChartOptions;
+  const legendColors = SpeciesPieChartColors(currMangrove);
+  const legendLabels = SpeciesPieChartLabels(currMangrove);
+  console.log(legendColors)
+  const indices = Array.from({length: legendColors.length}, (_, i) => i);
+  const half = Number(Math.ceil(legendColors.length / 2));
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle tag="h5">Species Cover Statistics</CardTitle>
+        <p className="card-category">Latest species information</p>
+      </CardHeader>
+      <CardBody style={{ height: "266px" }}>
+        <Pie
+          data={data}
+          options={options}
+        />
+      </CardBody>
+      <CardFooter>
+        <div 
+          style={{ 
+            display: "flex", 
+            flexDirection: "row", 
+            justifyContent: "space-around", 
+            alignItems: "center"
+        }}
+        >
+          <div className="legend">
+            {indices.slice(0, half).map((index) => {
+              return (
+              <>
+                <i className="fa fa-circle" style={{ color: legendColors[index] }} />
+                {` ${legendLabels[index]}`}
+                <br />
+              </>);
+            })}
+          </div>
+          <div className="legend">
+            {indices.slice(half).map((index) => {
+              return (
+              <>
+                <i className="fa fa-circle" style={{ color: legendColors[index] }} />
+                {` ${legendLabels[index]}`}
+                <br />
+              </>);
+            })}
           </div>
         </div>
-      ),
-      type: type,
-      icon: "nc-icon nc-bell-55",
-      autoDismiss: 7
-    };
-    notificationAlert.current.notificationAlert(options);
+        {/* <hr />
+        <div className="stats">
+          <i className="fa fa-calendar" /> Number of emails sent
+        </div> */}
+      </CardFooter>
+    </Card>
+  )
+}
+
+function LandCoverLineChart() {
+  const options = lineChartOptions;
+  const data = LandCoverLine.data
+
+  return (
+    <>
+    <Card className="card-chart">
+      <CardHeader>
+        <CardTitle tag="h5">Land Cover Distribution</CardTitle>
+        <p className="card-category">Line Chart with Points</p>
+      </CardHeader>
+      <CardBody>
+        <Line
+          data={data}
+          options={options}
+          width={400}
+          height={100}
+        />
+      </CardBody>
+      <CardFooter>
+        <div className="chart-legend">
+          <i className="fa fa-circle text-info" /> Tesla Model S{" "}
+          <i className="fa fa-circle text-warning" /> BMW 5 Series
+        </div>
+        <hr />
+        <div className="card-stats">
+          <i className="fa fa-check" /> Data information certified
+        </div>
+      </CardFooter>
+    </Card>
+    </>);
+}
+
+function Dashboard() {
+  const useBeforeRender = (callback, deps) => {
+      const [isRun, setIsRun] = React.useState(false);
+
+      if (!isRun) {
+          callback();
+          setIsRun(true);
+      }
+
+      React.useEffect(() => () => setIsRun(false), deps);
   };
+  useBeforeRender(() => localStorage.setItem('currMangrove', 'Sundarbans'), []);
+
+
   return (
     <>
       <div className="content">
-        <NotificationAlert ref={notificationAlert} />
         <Row>
-          <Col md="12">
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h5">Notifications</CardTitle>
-                <p className="card-category">
-                  Handcrafted by our former colleague{" "}
-                  <a
-                    target="_blank"
-                    href="https://www.instagram.com/manu.nazare/"
-                  >
-                    Nazare Emanuel-Ioan (Manu)
-                  </a>
-                  . Please checkout the{" "}
-                  <a
-                    href="https://github.com/creativetimofficial/react-notification-alert"
-                    target="_blank"
-                  >
-                    full documentation.
-                  </a>
-                </p>
-              </CardHeader>
-              <CardBody>
-                <Row>
-                  <Col md="6">
-                    <Card className="card-plain">
-                      <CardHeader>
-                        <CardTitle tag="h5">Notifications Style</CardTitle>
-                      </CardHeader>
-                      <CardBody>
-                        <Alert color="info">
-                          <span>This is a plain notification</span>
-                        </Alert>
-                        <UncontrolledAlert color="info" fade={false}>
-                          <span>This is a notification with close button.</span>
-                        </UncontrolledAlert>
-                        <UncontrolledAlert
-                          className="alert-with-icon"
-                          color="info"
-                          fade={false}
-                        >
-                          <span
-                            data-notify="icon"
-                            className="nc-icon nc-bell-55"
-                          />
-                          <span data-notify="message">
-                            This is a notification with close button and icon.
-                          </span>
-                        </UncontrolledAlert>
-                        <UncontrolledAlert
-                          className="alert-with-icon"
-                          color="info"
-                          fade={false}
-                        >
-                          <span
-                            data-notify="icon"
-                            className="nc-icon nc-chart-pie-36"
-                          />
-                          <span data-notify="message">
-                            This is a notification with close button and icon
-                            and have many lines. You can see that the icon and
-                            the close button are always vertically aligned. This
-                            is a beautiful notification. So you don't have to
-                            worry about the style.
-                          </span>
-                        </UncontrolledAlert>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                  <Col md="6">
-                    <Card className="card-plain">
-                      <CardHeader>
-                        <CardTitle tag="h5">Notification states</CardTitle>
-                      </CardHeader>
-                      <CardBody>
-                        <UncontrolledAlert color="primary" fade={false}>
-                          <span>
-                            <b>Primary - </b>
-                            This is a regular notification made with
-                            color="primary"
-                          </span>
-                        </UncontrolledAlert>
-                        <UncontrolledAlert color="info" fade={false}>
-                          <span>
-                            <b>Info - </b>
-                            This is a regular notification made with
-                            color="info"
-                          </span>
-                        </UncontrolledAlert>
-                        <UncontrolledAlert color="success" fade={false}>
-                          <span>
-                            <b>Success - </b>
-                            This is a regular notification made with
-                            color="success"
-                          </span>
-                        </UncontrolledAlert>
-                        <UncontrolledAlert color="warning" fade={false}>
-                          <span>
-                            <b>Warning - </b>
-                            This is a regular notification made with
-                            color="warning"
-                          </span>
-                        </UncontrolledAlert>
-                        <UncontrolledAlert color="danger" fade={false}>
-                          <span>
-                            <b>Danger - </b>
-                            This is a regular notification made with
-                            color="danger"
-                          </span>
-                        </UncontrolledAlert>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
+          <Col md="6">
+            <SundarbansSpeciesPieChart />
+          </Col>
+          <Col md="6">
+            <SundarbansSpeciesPieChart />
           </Col>
         </Row>
         <Row>
           <Col md="12">
-            <Card>
-              <CardBody>
-                <div className="places-buttons">
-                  <Row>
-                    <Col className="ml-auto mr-auto text-center" md="6">
-                      <CardTitle tag="h4">Notifications Places</CardTitle>
-                      <p className="category">Click to view notifications</p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="ml-auto mr-auto" lg="8">
-                      <Row>
-                        <Col md="4">
-                          <Button
-                            block
-                            color="primary"
-                            onClick={() => notify("tl")}
-                          >
-                            Top Left
-                          </Button>
-                        </Col>
-                        <Col md="4">
-                          <Button
-                            block
-                            color="primary"
-                            onClick={() => notify("tc")}
-                          >
-                            Top Center
-                          </Button>
-                        </Col>
-                        <Col md="4">
-                          <Button
-                            block
-                            color="primary"
-                            onClick={() => notify("tr")}
-                          >
-                            Top Right
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col className="ml-auto mr-auto" lg="8">
-                      <Row>
-                        <Col md="4">
-                          <Button
-                            block
-                            color="primary"
-                            onClick={() => notify("bl")}
-                          >
-                            Bottom Left
-                          </Button>
-                        </Col>
-                        <Col md="4">
-                          <Button
-                            block
-                            color="primary"
-                            onClick={() => notify("bc")}
-                          >
-                            Bottom Center
-                          </Button>
-                        </Col>
-                        <Col md="4">
-                          <Button
-                            block
-                            color="primary"
-                            onClick={() => notify("br")}
-                          >
-                            Bottom Right
-                          </Button>
-                        </Col>
-                      </Row>
-                    </Col>
-                  </Row>
-                </div>
-              </CardBody>
-            </Card>
+            <LandCoverLineChart />
+          </Col>
+        </Row>
+        <Row>
+          <Col md="12">
+            <LandCoverLineChart />
           </Col>
         </Row>
       </div>
@@ -283,4 +155,4 @@ function Notifications() {
   );
 }
 
-export default Notifications;
+export default Dashboard;

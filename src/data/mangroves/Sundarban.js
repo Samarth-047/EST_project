@@ -31,3 +31,20 @@ export const Sundarban_species_data = [
     ["4.", "X. mekongensis", "5383", "3444", "7788", "8466"],
     ["5.", "S. apelatala", "3126", "8109", "11,934", "15,016"],
 ];
+
+export const Sundarban_species_pie = {
+    'data': [199857, 180742, 193698, 8466, 15016],
+    'labels': ["H. fomes", "E. agallocha", "C. decandra", "X. mekongensis", "S. apelatala" ]
+}
+
+export const Sundarban_land_cover_line = {
+    'years': [1975, 1990, 2005, 2020],
+    'labels': ["Dense", "Moderate-Dense", "Sparse", "Barren", "Water"],
+    'data': [
+        [4527, 2657, 2818, 1884],
+        [809, 1817, 1734, 2120],
+        [540, 1735, 1363, 1815],
+        [1002, 416, 522, 247],
+        [3142, 3408, 3596, 3963]
+    ]
+}

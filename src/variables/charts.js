@@ -17,6 +17,10 @@
 
 */
 
+const { LandCoverLineYears } = require("data/land_cover_line");
+const { LandCoverLineData } = require("data/land_cover_line");
+const { LandCoverLineColors } = require("data/land_cover_line");
+const { SpeciesPieChartColors } = require("data/species_pie");
 const { SpeciesPieChartLabels, SpeciesPieChartData } = require("data/species_pie");
 
 const dashboard24HoursPerformanceChart = {
@@ -102,8 +106,9 @@ const dashboard24HoursPerformanceChart = {
 
 const SpeciesPieChart = {
   data: (canvas) => {
-    const labels = SpeciesPieChartLabels('Andaman');
-    const data = SpeciesPieChartData('Andaman');
+    const mangrove = localStorage.getItem("currMangrove");
+    const labels = SpeciesPieChartLabels(mangrove);
+    const data = SpeciesPieChartData(mangrove);
     return {
       labels: labels,
       datasets: [
@@ -111,7 +116,7 @@ const SpeciesPieChart = {
           label: "Species",
           pointRadius: 0,
           pointHoverRadius: 0,
-          backgroundColor: ["#e3e3e3", "#4acccd", "#fcc468", "#ef8157"],
+          backgroundColor: SpeciesPieChartColors(mangrove),
           borderWidth: 0,
           data: data
         }
@@ -121,53 +126,57 @@ const SpeciesPieChart = {
 };
 
 
-const dashboardNASDAQChart = {
+const LandCoverLine = {
+  
   data: (canvas) => {
+    const mangrove = localStorage.getItem('currMangrove') 
+    console.log(mangrove)
+    const datas = LandCoverLineData(mangrove);
+    const years = LandCoverLineYears(mangrove);
+    const colors = LandCoverLineColors(mangrove);
+    const indices = Array.from({length: datas.length}, (x, i) => i);
+    const dataset = indices.map((i) => {
+      return {
+        data: datas[i],
+        fill: false,
+        borderColor: colors[i],
+        backgroundColor: "transparent",
+        pointBorderColor: colors[i],
+        pointRadius: 4,
+        pointHoverRadius: 4,
+        pointBorderWidth: 8,
+        tension: 0.4
+      };
+    });
+    console.log(dataset);
     return {
-      labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ],
-      datasets: [
-        {
-          data: [0, 19, 15, 20, 30, 40, 40, 50, 25, 30, 50, 70],
-          fill: false,
-          borderColor: "#fbc658",
-          backgroundColor: "transparent",
-          pointBorderColor: "#fbc658",
-          pointRadius: 4,
-          pointHoverRadius: 4,
-          pointBorderWidth: 8,
-          tension: 0.4
-        },
-        {
-          data: [0, 5, 10, 12, 20, 27, 30, 34, 42, 45, 55, 63],
-          fill: false,
-          borderColor: "#51CACF",
-          backgroundColor: "transparent",
-          pointBorderColor: "#51CACF",
-          pointRadius: 4,
-          pointHoverRadius: 4,
-          pointBorderWidth: 8,
-          tension: 0.4
-        }
-      ]
+      labels: years,
+      datasets: dataset
+      // [
+      //   {
+      //     data: datas[0],
+      //     fill: false,
+      //     borderColor: "#fbc658",
+      //     backgroundColor: "transparent",
+      //     pointBorderColor: "#fbc658",
+      //     pointRadius: 4,
+      //     pointHoverRadius: 4,
+      //     pointBorderWidth: 8,
+      //     tension: 0.4
+      //   },
+      //   {
+      //     data: datas[1],
+      //     fill: false,
+      //     borderColor: "#51CACF",
+      //     backgroundColor: "transparent",
+      //     pointBorderColor: "#51CACF",
+      //     pointRadius: 4,
+      //     pointHoverRadius: 4,
+      //     pointBorderWidth: 8,
+      //     tension: 0.4
+      //   }
+      // ]
     };
-  },
-  options: {
-    plugins: {
-      legend: { display: false }
-    }
   }
 };
 
@@ -205,9 +214,16 @@ const pieChartOptions = {
   }
 };
 
+const lineChartOptions = {
+  plugins: {
+    legend: { display: false }
+  }
+};
+
 module.exports = {
   dashboard24HoursPerformanceChart,
   SpeciesPieChart,
-  dashboardNASDAQChart,
-  pieChartOptions
+  LandCoverLine,
+  pieChartOptions,
+  lineChartOptions
 };

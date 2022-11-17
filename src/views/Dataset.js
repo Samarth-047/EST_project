@@ -9,6 +9,7 @@ import {
     Col,
 } from "reactstrap";
 import {
+    Dropdown,
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
@@ -138,7 +139,7 @@ function Dataset() {
                     </Col>
                 </Row>
 
-
+                {mangrove !== "Kachchh" && (
                 <Row>
                     <Col md="12">
                         <Card>
@@ -151,6 +152,7 @@ function Dataset() {
                         </Card>
                     </Col>
                 </Row>
+                )}
 
             </div>
         </>

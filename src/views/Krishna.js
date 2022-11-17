@@ -1,160 +1,152 @@
-/*!
 
-=========================================================
-* Paper Dashboard React - v1.3.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-* Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard-react/blob/main/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
+import { textAlign } from "@mui/system";
 import React from "react";
-
-// reactstrap components
+import { Line, Pie } from "react-chartjs-2";
 import {
   Card,
   CardHeader,
   CardBody,
+  CardFooter,
   CardTitle,
-  Table,
   Row,
-  Col,
+  Col
 } from "reactstrap";
+// core components
+import {
+  LandCoverLine,
+  SpeciesPieChart,
+  pieChartOptions,
+  lineChartOptions
+} from "variables/charts.js";
+const { SpeciesPieChartColors } = require("data/species_pie");
+const { SpeciesPieChartLabels } = require("data/species_pie");
 
-const KrishnaTable = () => {
-  const headings = [
-    "Sr. No.",
-    "Land Cover",
-    "Year 1990",
-    "Year 2000",
-    "Year 2011",
-    "% change in 1990-2011",
-  ];
-  const data = [
-    ["1.", "Dense Mangroves", "7948", "8850", "9150", "15.12"],
-    ["2.", "Sparse Mangroves", "1667", "1443", "3373", "102.34"],
-    ["3.", "Degraded Mangroves", "2454", "1363", "1339", "-45.44"],
-    ["4.", "Aquaculture", "863", "20758", "14838", "1619.35"],
-    ["5.", "Water Bodies", "5765", "5878", "6319", "9.61"],
-    ["6.", "Agricuture", "26535", "12111", "15448", "-41.78"],
-    ["7.", "Sand", "1128", "2200", "2686", "138.12"],
-    ["8.", "Mud Flat", "14656", "10638", "8999", "-38.6"],
-    ["9.", "Casuarina", "3184", "959", "2048", "-35.68"],
-  ];
+const KrishnaSpeciesPieChart = () => {
+  const currMangrove = localStorage.getItem('currMangrove');
+  const data = (SpeciesPieChart.data);
+  const options = pieChartOptions;
+  const legendColors = SpeciesPieChartColors(currMangrove);
+  const legendLabels = SpeciesPieChartLabels(currMangrove);
+  console.log(legendColors)
+  const indices = Array.from({length: legendColors.length}, (_, i) => i);
+  const half = Number(Math.ceil(legendColors.length / 2));
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle tag="h5">Species Cover Statistics</CardTitle>
+        <p className="card-category">Latest species information</p>
+      </CardHeader>
+      <CardBody style={{ height: "266px" }}>
+        <Pie
+          data={data}
+          options={options}
+        />
+      </CardBody>
+      <CardFooter>
+        <div 
+          style={{ 
+            display: "flex", 
+            flexDirection: "row", 
+            justifyContent: "space-around", 
+            alignItems: "center"
+        }}
+        >
+          <div className="legend">
+            {indices.slice(0, half).map((index) => {
+              return (
+              <>
+                <i className="fa fa-circle" style={{ color: legendColors[index] }} />
+                {` ${legendLabels[index]}`}
+                <br />
+              </>);
+            })}
+          </div>
+          <div className="legend">
+            {indices.slice(half).map((index) => {
+              return (
+              <>
+                <i className="fa fa-circle" style={{ color: legendColors[index] }} />
+                {` ${legendLabels[index]}`}
+                <br />
+              </>);
+            })}
+          </div>
+        </div>
+        {/* <hr />
+        <div className="stats">
+          <i className="fa fa-calendar" /> Number of emails sent
+        </div> */}
+      </CardFooter>
+    </Card>
+  )
+}
+
+function LandCoverLineChart() {
+  const options = lineChartOptions;
+  const data = LandCoverLine.data
+
   return (
     <>
-      <Table responsive style={{'text-align': 'center'}}>
-        <thead className="text-primary">
-          <tr>
-            {headings.map((heading, index) => (
-              <th key={index}>{heading}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((land, index) => {
-            return (
-              <tr>
-                {land.map((val, index) => {
-                  return <td>{val}</td>;
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
-    </>
-  );
-};
+    <Card className="card-chart">
+      <CardHeader>
+        <CardTitle tag="h5">Land Cover Distribution</CardTitle>
+        <p className="card-category">Line Chart with Points</p>
+      </CardHeader>
+      <CardBody>
+        <Line
+          data={data}
+          options={options}
+          width={400}
+          height={100}
+        />
+      </CardBody>
+      <CardFooter>
+        <div className="chart-legend">
+          <i className="fa fa-circle text-info" /> Tesla Model S{" "}
+          <i className="fa fa-circle text-warning" /> BMW 5 Series
+        </div>
+        <hr />
+        <div className="card-stats">
+          <i className="fa fa-check" /> Data information certified
+        </div>
+      </CardFooter>
+    </Card>
+    </>);
+}
 
-function Tables() {
+function Dashboard() {
+  const useBeforeRender = (callback, deps) => {
+    const [isRun, setIsRun] = React.useState(false);
+
+    if (!isRun) {
+        callback();
+        setIsRun(true);
+    }
+
+    React.useEffect(() => () => setIsRun(false), deps);
+};
+useBeforeRender(() => localStorage.setItem('currMangrove', 'Krishna'), []);
+
   return (
     <>
       <div className="content">
         <Row>
-          <Col md="12">
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Land Cover of Krishna (in ha)</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <KrishnaTable />
-              </CardBody>
-            </Card>
+          <Col md="6">
+            <KrishnaSpeciesPieChart />
           </Col>
+          <Col md="6">
+            <KrishnaSpeciesPieChart />
+          </Col>
+        </Row>
+        <Row>
           <Col md="12">
-            <Card className="card-plain">
-              <CardHeader>
-                <CardTitle tag="h4">Table on Plain Background</CardTitle>
-                <p className="card-category">
-                  Here is a subtitle for this table
-                </p>
-              </CardHeader>
-              <CardBody>
-                <Table responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th>Name</th>
-                      <th>Country</th>
-                      <th>City</th>
-                      <th className="text-right">Salary</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td className="text-right">$36,738</td>
-                    </tr>
-                    <tr>
-                      <td>Minerva Hooper</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                      <td className="text-right">$23,789</td>
-                    </tr>
-                    <tr>
-                      <td>Sage Rodriguez</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                      <td className="text-right">$56,142</td>
-                    </tr>
-                    <tr>
-                      <td>Philip Chaney</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                      <td className="text-right">$38,735</td>
-                    </tr>
-                    <tr>
-                      <td>Doris Greene</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                      <td className="text-right">$63,542</td>
-                    </tr>
-                    <tr>
-                      <td>Mason Porter</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                      <td className="text-right">$78,615</td>
-                    </tr>
-                    <tr>
-                      <td>Jon Porter</td>
-                      <td>Portugal</td>
-                      <td>Gloucester</td>
-                      <td className="text-right">$98,615</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
+            <LandCoverLineChart />
+          </Col>
+        </Row>
+        <Row>
+          <Col md="12">
+            <LandCoverLineChart />
           </Col>
         </Row>
       </div>
@@ -162,4 +154,4 @@ function Tables() {
   );
 }
 
-export default Tables;
+export default Dashboard;
