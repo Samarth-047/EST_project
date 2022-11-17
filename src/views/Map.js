@@ -44,9 +44,12 @@ function Map() {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
   }
   //create a 2d array of lat and long
-  const lat = ["22.7443", "20.74", "21.9497", "13", "16.70","11.42" ]
-  const long = ["69.9550", " 87.00", "89.1833", "92", "82.11","79.77"]
-  const name = ["gulf-of-kachh", "bhitarkanika", "sunderbans", "andaman", "krishna-godavari","Pichavaram"]
+  const lat = ["22.7443", "20.74", "21.9497", "13", "16.70"]
+  // "11.42" ]
+  const long = ["69.9550", " 87.00", "89.1833", "92", "82.11"]
+  // "79.77"]
+  const name = ["Gulf of Kachchh", "Bhitarkanika", "Sundarbans", "Andaman and Nicobar", "Krishna-Godavari"];
+  // "Pichavaram"]
   const position = [lat.map((item) => item), long.map((item) => item)]
   return (
     <>
@@ -54,7 +57,7 @@ function Map() {
         <Row>
           <Col md="12">
             <Card>
-              <CardHeader>Google Maps</CardHeader>
+              <CardHeader>Mangrove Database of India</CardHeader>
               <CardBody>
                 <div
                   id="map"
@@ -74,14 +77,14 @@ function Map() {
                                       // onClick={() => navigate.push(`/${name[index]}`)}
                                       eventHandlers={{
                                         click: (e) => {
-                                          // console.log('marker clicked', e)
+                                          // // console.log('marker clicked', e)
                                           navigate.push(`/admin/${name[index]}`)
                                         },
                                       }}
 
                                     >
                                         <Tooltip>
-                                            Hotel: {name[index]}
+                                            Mangrove: {name[index]}
                                         </Tooltip>
                                     </Marker>
                                 </>

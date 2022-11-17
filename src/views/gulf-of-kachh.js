@@ -19,6 +19,8 @@ import {
   pieChartOptions,
   lineChartOptions
 } from "variables/charts.js";
+import { LandCoverLineLabels } from "data/land_cover_line";
+import { LandCoverLineColors } from "data/land_cover_line";
 const { SpeciesPieChartColors } = require("data/species_pie");
 const { SpeciesPieChartLabels } = require("data/species_pie");
 const { LandPieChartColors, LandPieChartLabels } = require("data/land_pie");
@@ -29,7 +31,7 @@ const MangroveSpeciesPieChart = () => {
   const options = pieChartOptions;
   const legendColors = SpeciesPieChartColors(currMangrove);
   const legendLabels = SpeciesPieChartLabels(currMangrove);
-  console.log(legendColors)
+  // console.log(legendColors)
   const indices = Array.from({length: legendColors.length}, (_, i) => i);
   const half = Number(Math.ceil(legendColors.length / 2));
 
@@ -90,7 +92,7 @@ function MangroveLandCoverPieChart() {
   const options = pieChartOptions;
   const legendColors = LandPieChartColors(currMangrove);
   const legendLabels = LandPieChartLabels(currMangrove);
-  console.log(legendColors)
+  // console.log(legendColors)
   const indices = Array.from({length: legendColors.length}, (_, i) => i);
   const half = Number(Math.ceil(legendColors.length / 2));
 
@@ -147,7 +149,12 @@ function MangroveLandCoverPieChart() {
 
 function LandCoverLineChart() {
   const options = lineChartOptions;
-  const data = LandCoverLine.data
+  const data = LandCoverLine.data;
+  const currMangrove = localStorage.getItem('currMangrove');
+  const legendColors = LandCoverLineColors(currMangrove);
+  const legendLabels = LandCoverLineLabels(currMangrove);
+  const indices = Array.from({length: legendColors.length}, (_, i) => i);
+  const half = Number(Math.ceil(legendColors.length / 2));
 
   return (
     <>
@@ -165,13 +172,34 @@ function LandCoverLineChart() {
         />
       </CardBody>
       <CardFooter>
-        <div className="chart-legend">
-          <i className="fa fa-circle text-info" /> Tesla Model S{" "}
-          <i className="fa fa-circle text-warning" /> BMW 5 Series
-        </div>
-        <hr />
-        <div className="card-stats">
-          <i className="fa fa-check" /> Data information certified
+      <div 
+          style={{ 
+            display: "flex", 
+            flexDirection: "row", 
+            justifyContent: "space-around", 
+            alignItems: "center"
+        }}
+        >
+          <div className="legend">
+            {indices.slice(0, half).map((index) => {
+              return (
+              <>
+                <i className="fa fa-circle" style={{ color: legendColors[index] }} />
+                {` ${legendLabels[index]}`}
+                <br />
+              </>);
+            })}
+          </div>
+          <div className="legend">
+            {indices.slice(half).map((index) => {
+              return (
+              <>
+                <i className="fa fa-circle" style={{ color: legendColors[index] }} />
+                {` ${legendLabels[index]}`}
+                <br />
+              </>);
+            })}
+          </div>
         </div>
       </CardFooter>
     </Card>
@@ -208,11 +236,11 @@ function Dashboard() {
             <LandCoverLineChart />
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col md="12">
             <LandCoverLineChart />
           </Col>
-        </Row>
+        </Row> */}
       </div>
     </>
   );

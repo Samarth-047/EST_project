@@ -36,6 +36,30 @@ export const Krishna_species_data = [
     ["8","Lythraceae","Sonneratia apetala","Kalingi"],
     ["9","Combretaceae","Lumnitzera racemosa","Kadivi"],
     ["10","Myrsinaceae","Aegiceras corniculatum","Guggiliam"],
-
-
 ];
+
+export const Krishna_species_pie = {
+    'data': [88.89, 5.55, 5.55],
+    'labels': ["Excoecaria agallocha", "Avicennia officinalis", "Avicennia mariana"]
+}
+
+export const Krishna_land_cover_line = {
+    'years': ["1990", "2000", "2011"],
+    'labels': ["Dense", "Sparse", "Degraded", "Aquaculture", "Water", "Agriculture", "Sand", "Mud Flat", "Casuarina"],
+    'data': [
+        [7948, 8850, 9150],
+        [1667, 1443, 3373],
+        [2454, 1363, 1339],
+        [863, 20758, 14838],
+        [5765, 5878, 6319],
+        [26535, 12111, 15448],
+        [1128, 2200, 2686],
+        [14656, 10638, 8999],
+        [3184, 959, 2048]
+    ]
+}
+
+export const Krishna_land_pie = {
+    'labels': ["Dense", "Sparse", "Degraded", "Aquaculture", "Water", "Agriculture", "Sand", "Mud Flat", "Casuarina"],
+    'data': [9150, 3373, 1339, 14838, 6319, 15448, 2686, 8999, 2048]
+}

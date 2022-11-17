@@ -1,6 +1,11 @@
 import { Sundarban_species_line } from "./mangroves/Sundarban"
 // import { Andaman_species_line } from "./mangroves/Andaman";
 
+// No Bhitarkanika data available
+// No Andaman data available
+// No Kachchh data available
+// No Krishna data available
+
 export const SpeciesLineYears = (mangrove) => {
     switch (mangrove) {
         case 'Sundarbans':

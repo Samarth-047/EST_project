@@ -141,7 +141,7 @@ const LandPieChart = {
           label: "Species",
           pointRadius: 0,
           pointHoverRadius: 0,
-          backgroundColor: SpeciesPieChartColors(mangrove),
+          backgroundColor: LandPieChartColors(mangrove),
           borderWidth: 0,
           data: data
         }
