@@ -1,9 +1,13 @@
 import { Sundarban_land_cover_line } from "./mangroves/Sundarban"
+import { Andaman_land_cover_line } from "./mangroves/Andaman";
 
 export const LandCoverLineYears = (mangrove) => {
     switch (mangrove) {
         case 'Sundarbans':
             return Sundarban_land_cover_line['years'];
+            break;
+        case 'Andaman':
+            return Andaman_land_cover_line['years'];
             break;
         default:
             break;
@@ -29,6 +33,9 @@ export const LandCoverLineData = (mangrove) => {
         case 'Sundarbans':
             return Sundarban_land_cover_line['data'];
             break;
+        case 'Andaman':
+            return Andaman_land_cover_line['data'];
+            break;
         default:
             break;
     }
@@ -43,6 +50,8 @@ export const LandCoverLineColors = (mangrove) => {
         case 'Sundarbans':
             return ['#fbc658', '#51CACF', '#f17e5d', '#6bd098', '#fcc468'];
             break;
+        case 'Andaman':
+            return ['#fbc658', '#51CACF', '#f17e5d', '#6bd098', '#fcc468', '#ef8157'];
         default:
             break;
     }
@@ -54,6 +63,8 @@ export const LandCoverLineLabels = (mangrove) => {
         case 'Sundarbans':
             return Sundarban_land_cover_line['labels'];
             break;
+        case 'Andaman':
+            return Andaman_land_cover_line['labels'];
         default:
             break;
     }

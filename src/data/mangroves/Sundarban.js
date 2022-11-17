@@ -26,8 +26,8 @@ export const Sundarban_species_headings = [
 
 export const Sundarban_species_data = [
     ["1.", "H. fomes", "221,886", "218,051", "214,679", "199,857"],
-    ["2.", "E. agallocha", "200,662", "195,642", "178,425", "180,742"],
-    ["3.", "C. decandra", "171,590", "195,692", "181,238", "193,698"],
+    ["2.", "E. agallocha", "200,662", "195,692", "178,425", "180,742"],
+    ["3.", "C. decandra", "171,590", "178,972", "181,238", "193,698"],
     ["4.", "X. mekongensis", "5383", "3444", "7788", "8466"],
     ["5.", "S. apelatala", "3126", "8109", "11,934", "15,016"],
 ];
@@ -46,5 +46,22 @@ export const Sundarban_land_cover_line = {
         [540, 1735, 1363, 1815],
         [1002, 416, 522, 247],
         [3142, 3408, 3596, 3963]
+    ]
+}
+
+export const Sundarban_land_pie = {
+    'labels': ["Dense", "Moderate-Dense", "Sparse", "Barren", "Water"],
+    'data': [1884, 2120, 1815, 247, 3963]
+}
+
+export const Sundarban_species_line = {
+    'years': [1977, 1989, 2000, 2015],
+    'labels': ["H. fomes", "E. agallocha", "C. decandra", "X. mekongensis", "S. apelatala"],
+    'data': [
+        [221886, 218051, 214679, 199857],
+        [200662, 195692, 178425, 180742],
+        [171590, 178972, 181238, 193698],
+        [5383, 3444, 7788, 8466],
+        [3126, 8109, 11934, 15016]
     ]
 }

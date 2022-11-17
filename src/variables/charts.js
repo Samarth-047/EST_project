@@ -23,6 +23,10 @@ const { LandCoverLineColors } = require("data/land_cover_line");
 const { SpeciesPieChartColors } = require("data/species_pie");
 const { SpeciesPieChartLabels, SpeciesPieChartData } = require("data/species_pie");
 
+const { LandPieChartColors, LandPieChartData, LandPieChartLabels } = require("data/land_pie");
+
+const { SpeciesLineYears, SpeciesLineData, SpeciesLineColors } = require("data/species_line");
+
 const dashboard24HoursPerformanceChart = {
   data: (canvas) => {
     return {
@@ -125,12 +129,32 @@ const SpeciesPieChart = {
   }
 };
 
+const LandPieChart = {
+  data: (canvas) => {
+    const mangrove = localStorage.getItem("currMangrove");
+    const labels = LandPieChartLabels(mangrove);
+    const data = LandPieChartData(mangrove);
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: "Species",
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          backgroundColor: SpeciesPieChartColors(mangrove),
+          borderWidth: 0,
+          data: data
+        }
+      ]
+    };
+  }
+};
+
 
 const LandCoverLine = {
   
   data: (canvas) => {
     const mangrove = localStorage.getItem('currMangrove') 
-    console.log(mangrove)
     const datas = LandCoverLineData(mangrove);
     const years = LandCoverLineYears(mangrove);
     const colors = LandCoverLineColors(mangrove);
@@ -148,34 +172,9 @@ const LandCoverLine = {
         tension: 0.4
       };
     });
-    console.log(dataset);
     return {
       labels: years,
       datasets: dataset
-      // [
-      //   {
-      //     data: datas[0],
-      //     fill: false,
-      //     borderColor: "#fbc658",
-      //     backgroundColor: "transparent",
-      //     pointBorderColor: "#fbc658",
-      //     pointRadius: 4,
-      //     pointHoverRadius: 4,
-      //     pointBorderWidth: 8,
-      //     tension: 0.4
-      //   },
-      //   {
-      //     data: datas[1],
-      //     fill: false,
-      //     borderColor: "#51CACF",
-      //     backgroundColor: "transparent",
-      //     pointBorderColor: "#51CACF",
-      //     pointRadius: 4,
-      //     pointHoverRadius: 4,
-      //     pointBorderWidth: 8,
-      //     tension: 0.4
-      //   }
-      // ]
     };
   }
 };
@@ -220,10 +219,39 @@ const lineChartOptions = {
   }
 };
 
+const SpeciesLine = {
+  data: (canvas) => {
+    const mangrove = localStorage.getItem('currMangrove') 
+    const datas = SpeciesLineData(mangrove);
+    const years = SpeciesLineYears(mangrove);
+    const colors = SpeciesLineColors(mangrove);
+    const indices = Array.from({length: datas.length}, (x, i) => i);
+    const dataset = indices.map((i) => {
+      return {
+        data: datas[i],
+        fill: false,
+        borderColor: colors[i],
+        backgroundColor: "transparent",
+        pointBorderColor: colors[i],
+        pointRadius: 4,
+        pointHoverRadius: 4,
+        pointBorderWidth: 8,
+        tension: 0.4
+      };
+    });
+    return {
+      labels: years,
+      datasets: dataset
+    };
+  } 
+}
+
 module.exports = {
   dashboard24HoursPerformanceChart,
   SpeciesPieChart,
   LandCoverLine,
   pieChartOptions,
-  lineChartOptions
+  lineChartOptions,
+  LandPieChart,
+  SpeciesLine
 };

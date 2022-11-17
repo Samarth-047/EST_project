@@ -1,8 +1,3 @@
-export const Andaman_species_pie = {
-    'data': [44,10,17,1,3,5,1,5,2,9,3],
-    'labels': ["Rhizophora","Ceriops","Bruguiera","Aegiceras","Xylorhiza","Sonneratia","pemphis","Excoecaria","Lumnitzera","Avaicennia","Heritiera"],
-}
-
 export const Andaman_land_cover_headings = [
     "Sr. No.",
     "Land cover",
@@ -64,3 +59,26 @@ export const Andaman_species_data = [
     ["24.","Rubiaceae","Scyphiphora hydrophyllaceae","✅","✅","✅","✅","❌","❌"],
     ["25.","Sterculiaceae","Heritiera littoralis","✅","✅","✅","✅","❌","❌"],
 ];
+
+export const Andaman_species_pie = {
+    'data': [44,10,17,1,3,5,1,5,2,9,3],
+    'labels': ["Rhizophora","Ceriops","Bruguiera","Aegiceras","Xylorhiza","Sonneratia","pemphis","Excoecaria","Lumnitzera","Avaicennia","Heritiera"],
+}
+
+export const Andaman_land_cover_line = {
+    'years': [1976, 1989, 1993, 2000, 2006, 2014],
+    'labels': ["Forest-cover", "Mangrove", "Agriculture", "Barren", "Water", "Settlements"],
+    'data': [
+        [4707.5, 4609.9, 4615.4, 4582, 4522.1, 4369.9],
+        [763.7, 752.6, 749.7, 749.6, 726.5, 674.5],
+        [163.9, 228.6, 241.7, 245.3, 278.1, 402.5],
+        [83.5, 98.2, 100.2, 100.2, 113.1, 125.9],
+        [598.2, 593.5, 594.8, 596.8, 616.3, 634.4],
+        [9.2, 11.1, 12.0, 13.6, 14.5, 15.5],
+    ]
+}
+
+export const Andaman_land_pie = {
+    'labels': ["Forest-cover", "Mangrove", "Agriculture", "Barren", "Water", "Settlements"],
+    'data': [4369.9, 674.5, 402.5, 125.9, 634.4, 15.5]
+}
